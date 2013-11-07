@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8"/>
+	<title>Backbone.js Library</title>
+  <link rel="stylesheet" href="/css/screen.css"> 
+ <link href="/vendor/bower/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+	<div id="books">
+
+ <div class="jumbotron">
+  <h1>My library</h1>
+  </div>
+	<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="coverImage" class="col-sm-2 control-label">CoverImage</label>
+    <div class="col-sm-10">
+      <input type="file" class="form-control" id="coverImage" placeholder="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="title" class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="title" placeholder="Title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="author" class="col-sm-2 control-label">Author</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="author" placeholder="Author">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="releaseDate" class="col-sm-2 control-label">Release date</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="releaseDate" placeholder="Release date">
+    </div>
+  </div>
+   <div class="form-group">
+    <label for="keywords" class="col-sm-2 control-label">Keywords</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="keywords" placeholder="Keywords">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="add" type="button" class="btn btn-success">Add</button>
+    </div>
+  </div>
+</form>
+
+
+ 
+
+	<script id="bookTemplate" type="text/template">
+		<img src="<%= coverImage %>" class="img-thumbnail"/>
+		<ul>
+			<li><%= title %></li>
+			<li><%= author %></li>
+			<li><%= releaseDate %></li>
+			<li><%= keywords %></li>
+		</ul>
+		 <button id="delete" type="button" class="btn btn-danger">Delete</button>
+	</script>
+
+	<script src="/vendor/bower/jquery/jquery.min.js"></script>
+	<script src="/vendor/bower/underscore/underscore-min.js"></script>
+	<script src="/vendor/bower/backbone/backbone-min.js"></script>
+	<script src="/js/models/book.js"></script>
+	<script src="/js/collections/library.js"></script>
+	<script src="/js/views/book.js"></script>
+	<script src="/js/views/library.js"></script>
+	<script src="/js/app.js"></script>
+
+</body>
+</html>
+
