@@ -28,8 +28,8 @@ server.configure(function() {
     }));
 });
 
-// Configure routing
-require('./routes/books')(server);
+
+
 
 //Start server
 var port = 4710;
