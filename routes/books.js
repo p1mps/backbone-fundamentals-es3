@@ -14,6 +14,7 @@ mongoose.connect("mongodb://localhost:27017/library_db");
 var Keywords = new mongoose.Schema({
     keyword: String
 });
+
 var Book = new mongoose.Schema({
     title: String,
     author: String,
@@ -35,7 +36,10 @@ function booksAPI(server) {
     // API GET Get a list of all books
     server.get('/api/books', function(request, response) {
         return BookModel.find(function(err, books) {
-            if (err) throw err;
+            if (err) {
+              response.send(404, 'Error retrieving books');
+              throw err;
+            }
             return response.send(books);
         });
     });
@@ -50,7 +54,10 @@ function booksAPI(server) {
             keywords: request.body.keywords
         });
         book.save(function(err) {
-            if (err) throw err;
+            if (err) {
+              response.send(404, 'Error creating book');
+              throw err;
+            }
             console.log('created');
             return response.send(book);
         });
@@ -59,7 +66,10 @@ function booksAPI(server) {
     // API GET by ID Get a single book by id
     server.get('/api/books/:id', function(request, response) {
         return BookModel.findById(request.params.id, function(err, book) {
-            if (err) throw err;
+            if (err) {
+              response.send(404, 'Error getting required book');
+              throw err;
+            }
             return response.send(book);
         });
     });
@@ -74,9 +84,12 @@ function booksAPI(server) {
             book.keywords = request.body.keywords;
 
             return book.save(function(err) {
-                if (err) throw err;
-                console.log('book updated');
-                return response.send(book);
+              if (err) {
+                response.send(404, 'Error updating book');
+                throw err;
+              }
+              console.log('book updated');
+              return response.send(book);
             });
         });
     });
@@ -86,9 +99,12 @@ function booksAPI(server) {
         console.log('Deleting book with id: ' + request.params.id);
         return BookModel.findById(request.params.id, function(err, book) {
             return book.remove(function(err) {
-                if (err) throw err;
-                console.log('Book removed');
-                return response.send('');
+              if (err) {
+                response.send(404, 'Error deleting book');
+                throw err;
+              }
+              console.log('Book removed');
+              return response.send('');
             });
         });
     });
